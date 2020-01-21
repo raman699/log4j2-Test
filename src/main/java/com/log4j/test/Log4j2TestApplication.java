@@ -3,6 +3,7 @@ package com.log4j.test;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
 import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFactory;
@@ -24,10 +25,10 @@ public class Log4j2TestApplication {
 
 		builder.add(loggerComp);
 		builder.setConfigurationSource(null);
-		BuiltConfiguration configuration = builder.build();
+		Configuration configuration = builder.build();
 		LoggerContext ctx = Configurator.initialize(builder.build());
 		ctx.start(configuration);
-		ctx.updateLoggers();
+		ctx.updateLoggers(configuration);
 		System.out.println(ctx.hasLogger(loggerName));
 		Logger logger = ctx.getLogger(loggerName);
 		System.out.println(logger.isAdditive());
