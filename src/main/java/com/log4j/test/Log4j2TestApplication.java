@@ -64,7 +64,7 @@ public class Log4j2TestApplication {
 	}
 
 	private static String getHeader() {
-		return "column1;coloumn2";
+		return "column1;coloumn2\n";
 	}
 
 	private static Appender createCsvAppender(final Configuration config) {
@@ -81,10 +81,10 @@ public class Log4j2TestApplication {
 
 	private static Appender createTextAppender(final Configuration config) {
 
-		final Layout<String> layout = getTextLayout(config, "header");
+		final Layout<String> layout = getTextLayout(config, "header\n");
 
 		return RollingFileAppender.newBuilder().setConfiguration(config).setName("txtAppender")
-				.withFileName("TestFile.text").withFilePattern("TestFile.txt")
+				.withFileName("TestFile.txt").withFilePattern("TestFile.txt")
 				.withPolicy(SizeBasedTriggeringPolicy.createPolicy("100M"))
 				.withStrategy(DefaultRolloverStrategy.newBuilder().withConfig(config).build()).withImmediateFlush(true)
 				.setFilter(ThresholdFilter.createFilter(Level.ALL, Result.ACCEPT, Result.DENY)).setLayout(layout)
